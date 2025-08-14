@@ -30,15 +30,114 @@ A rule consists of:
 Example `rules.json`:
 ```json
 [
-  {
-    "description": "Mark interview mails from HR as read",
-    "predicate": "all",
-    "conditions": [
-      {"field": "From", "operator": "contains", "value": "hr@example.com"},
-      {"field": "Subject", "operator": "contains", "value": "Interview"}
-    ],
-    "actions": [
-      {"action": "Mark as Read"}
-    ]
-  }
+    {
+        "description": "Altering Google mail",
+        "predicate": "all",
+        "conditions": [
+            {
+                "field": "From",
+                "operator": "contains",
+                "value": "Google"
+            },
+            {
+                "field": "Subject",
+                "operator": "contains",
+                "value": "Security alert"
+            },
+            {
+                "field": "Date received",
+                "operator": "is less than",
+                "value": "2"
+            }
+        ],
+        "actions": [
+            {
+                "action": "Move Message",
+                "mailbox": "Trash"
+            },
+            {
+                "action": "Mark as Read"
+            }
+        ]
+    }
 ]
+```
+
+---
+
+## 🚀 Steps to Run the Project
+
+1. **Clone the Repository**
+```bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+```
+
+2. **Create and Activate a Virtual Environment** (recommended)
+```bash
+python -m venv venv
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+```
+
+3. **Install Required Dependencies**
+```bash
+pip install -r requirements.txt
+```
+Or directly:
+```bash
+pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+```
+
+4. **Enable Gmail API and Get `credentials.json`**
+   - Go to **[Google Cloud Console](https://console.cloud.google.com/)**
+   - Create a new project (or select an existing one)
+   - Go to **APIs & Services → Library**
+   - Search for **Gmail API** and click **Enable**
+   - Go to **APIs & Services → Credentials**
+   - Click **Create Credentials → OAuth client ID**
+   - Select **Desktop app**
+   - Download the JSON file, rename it to `credentials.json`, and place it in your project folder
+
+5. **Create Rules Using the GUI**
+```bash
+python rule_builder.py
+```
+   - Add conditions and actions
+   - Click **OK** to save
+   - This will create/append to `rules.json`
+
+6. **Run the Main Script**
+```bash
+python main.py
+```
+   - First run will open a browser for Google OAuth login
+   - After authorization, `token.json` will be saved for reuse
+   - Emails will be fetched into `emails.db` and rules applied
+
+---
+
+## 📹 Demonstration
+Refer to the provided **screen recording** for:
+- Creating rules via `rule_builder.py`
+- Running `main.py` to fetch and process emails
+- Live Gmail changes after applying rules
+
+---
+
+## 📝 Quick Commands (Copy-Paste Friendly)
+```bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+# OR
+pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+# Add credentials.json to project folder
+python rule_builder.py
+python main.py
+```
+
