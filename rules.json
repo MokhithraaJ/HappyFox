@@ -1,0 +1,119 @@
+[
+    {
+        "description": "Changing Google mail",
+        "predicate": "all",
+        "conditions": [
+            { "field": "From", "operator": "contains", "value": "Google" },
+            { "field": "Subject", "operator": "contains", "value": "Security alert" },
+            { "field": "Date received", "operator": "is less than", "value": "2" }
+        ],
+        "actions": [
+            { "action": "Move Message", "mailbox": "Spam" },
+            { "action": "Mark as Read" }
+        ]
+    },
+    {
+        "description": "Job interview mails",
+        "predicate": "any",
+        "conditions": [
+            { "field": "From", "operator": "contains", "value": "hr@" },
+            { "field": "Subject", "operator": "contains", "value": "Interview" }
+        ],
+        "actions": [
+            { "action": "Move Message", "mailbox": "Jobs" },
+            { "action": "Mark as Unread" }
+        ]
+    },
+    {
+        "description": "Unread newsletters older than 7 days",
+        "predicate": "all",
+        "conditions": [
+            { "field": "From", "operator": "contains", "value": "newsletter" },
+            { "field": "Date received", "operator": "is greater than", "value": "7" }
+        ],
+        "actions": [
+            { "action": "Delete Message" }
+        ]
+    },
+    {
+        "description": "Bank statements",
+        "predicate": "all",
+        "conditions": [
+            { "field": "From", "operator": "contains", "value": "bank.com" },
+            { "field": "Subject", "operator": "contains", "value": "Statement" }
+        ],
+        "actions": [
+            { "action": "Move Message", "mailbox": "Finance" },
+            { "action": "Mark as Read" }
+        ]
+    },
+    {
+        "description": "Social media notifications",
+        "predicate": "any",
+        "conditions": [
+            { "field": "From", "operator": "contains", "value": "facebook" },
+            { "field": "From", "operator": "contains", "value": "twitter" },
+            { "field": "From", "operator": "contains", "value": "instagram" }
+        ],
+        "actions": [
+            { "action": "Move Message", "mailbox": "Social" }
+        ]
+    },
+    {
+        "description": "Work from boss - urgent",
+        "predicate": "all",
+        "conditions": [
+            { "field": "From", "operator": "equals", "value": "boss@company.com" },
+            { "field": "Subject", "operator": "contains", "value": "URGENT" }
+        ],
+        "actions": [
+            { "action": "Move Message", "mailbox": "Important" },
+            { "action": "Mark as Unread" }
+        ]
+    },
+    {
+        "description": "GitHub notifications",
+        "predicate": "all",
+        "conditions": [
+            { "field": "From", "operator": "contains", "value": "github.com" }
+        ],
+        "actions": [
+            { "action": "Move Message", "mailbox": "GitHub" },
+            { "action": "Mark as Read" }
+        ]
+    },
+    {
+        "description": "Shopping receipts",
+        "predicate": "any",
+        "conditions": [
+            { "field": "From", "operator": "contains", "value": "amazon.com" },
+            { "field": "From", "operator": "contains", "value": "flipkart.com" },
+            { "field": "Subject", "operator": "contains", "value": "Order Confirmation" }
+        ],
+        "actions": [
+            { "action": "Move Message", "mailbox": "Shopping" }
+        ]
+    },
+    {
+        "description": "Support tickets",
+        "predicate": "all",
+        "conditions": [
+            { "field": "From", "operator": "contains", "value": "support@" },
+            { "field": "Subject", "operator": "contains", "value": "Ticket" }
+        ],
+        "actions": [
+            { "action": "Move Message", "mailbox": "Support" },
+            { "action": "Mark as Read" }
+        ]
+    },
+    {
+        "description": "Old unread emails older than 30 days",
+        "predicate": "all",
+        "conditions": [
+            { "field": "Date received", "operator": "is greater than", "value": "30" }
+        ],
+        "actions": [
+            { "action": "Delete Message" }
+        ]
+    }
+]
